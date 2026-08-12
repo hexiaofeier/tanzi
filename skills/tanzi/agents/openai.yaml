@@ -1,0 +1,6 @@
+interface:
+  display_name: "tanzi"
+  short_description: "免费跨平台公开信息采集、正文获取、来源追溯与证据边界整理"
+  default_prompt: "Use $tanzi to collect public information on a defined topic and deliver a traceable source report."
+policy:
+  allow_implicit_invocation: true
