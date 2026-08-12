@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>tanzi｜啥好用评估 · 白纸墨字</title>
+  <style>:root {
+  --paper: #FFFFFF;
+  --ink: #17181A;
+  --muted: #676C74;
+  --line: #E3E5E8;
+  --soft: #F5F6F7;
+  --red: #B73F42;
+  --blue: #244C66;
+  --amber: #D6A553;
+  --green: #82B29B;
+}
+
+* { box-sizing: border-box; }
+html { background: var(--paper); }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+}
+a { color: var(--ink); text-decoration-color: var(--line); text-underline-offset: 3px; }
+a:hover { text-decoration-color: currentColor; }
+.page { width: min(1040px, calc(100% - 36px)); margin: 0 auto; padding: 40px 0 60px; }
+
+.hero { border-top: 2px solid var(--ink); padding: 22px 0 22px; }
+.eyebrow { margin: 0 0 10px; font-size: 12px; font-weight: 700; letter-spacing: .16em; color: var(--muted); text-transform: uppercase; }
+h1 { margin: 0; font-size: clamp(30px, 5vw, 46px); line-height: 1.2; letter-spacing: -.02em; font-weight: 800; }
+.title-red { color: var(--red); }
+.title-neutral { color: var(--ink); font-weight: 500; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 20px; margin-top: 14px; font-size: 13px; color: var(--muted); }
+.positioning { margin: 22px 0 0; padding: 16px 20px; border-radius: 4px; border-left: 3px solid var(--blue); background: var(--soft); font-size: 16px; font-weight: 400; color: var(--ink); }
+.positioning span { display: block; }
+.positioning span + span { margin-top: 4px; }
+
+.section { margin-top: 44px; }
+.section-title { display: flex; align-items: baseline; gap: 10px; margin: 0 0 16px; font-size: 23px; line-height: 1.3; font-weight: 800; color: var(--ink); }
+.section-title .num { font-size: 15px; font-weight: 700; padding: 2px 8px; border-radius: 3px; }
+.c-blue .num { background: var(--blue); color: #fff; }
+.c-red .num { background: var(--red); color: #fff; }
+.c-green .num { background: var(--green); color: var(--ink); }
+.c-amber .num { background: var(--amber); color: var(--ink); }
+
+.section-summary { margin: 0 0 16px; padding: 12px 16px; border-left: 3px solid; background: var(--soft); font-weight: 400; font-size: 15px; border-radius: 4px; color: var(--ink); }
+.section-summary.c-blue { border-left-color: var(--blue); }
+.section-summary.c-green { border-left-color: var(--green); }
+.section-summary.c-amber { border-left-color: var(--amber); }
+.fit-verdict { color: var(--ink); border-left: 3px solid var(--red); background: var(--soft); padding: 12px 16px; font-weight: 400; font-size: 15px; border-radius: 4px; margin: 0 0 16px; }
+
+.score-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin: 20px 0 6px; }
+.score-value { font-size: 36px; font-weight: 850; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.score-num { color: var(--red); }
+.score-label { color: var(--ink); font-weight: 700; }
+.score-basis { color: var(--muted); font-size: 13px; text-align: right; max-width: 320px; }
+.score-hl { color: var(--red); font-weight: 800; font-size: 21px; font-variant-numeric: tabular-nums; }
+.quant-num { color: var(--red); }
+.score-line { margin: 0 0 8px; }
+.score-line + p { margin: 0; }
+.scale { display: grid; grid-template-columns: repeat(10, 1fr); gap: 3px; margin-top: 14px; height: 16px; }
+.scale-segment { min-width: 0; background: var(--soft); border: 1px solid var(--line); overflow: hidden; }
+.scale-fill { display: block; height: 100%; background: var(--red); }
+.scale-note { margin: 8px 0 0; font-size: 12px; color: var(--muted); }
+.scale-explain { display: block; margin-bottom: 2px; font-weight: 700; color: var(--ink); }
+
+.plain-box, .card { border-radius: 4px; border: 1px solid var(--line); border-left-width: 3px; background: #fff; padding: 16px 18px; }
+.plain-box h3, .card h3 { margin: 0 0 9px; font-size: 15px; color: var(--ink); font-weight: 800; }
+.plain-box ul, .card ul, .card ol { padding-left: 1.1em; color: var(--ink); }
+.plain-box li, .card li { color: var(--ink); }
+
+.conclusion-box { margin-top: 20px; border-radius: 4px; border: 1px solid var(--line); border-left: 3px solid var(--blue); background: #fff; padding: 4px 20px; }
+.conclusion-block { padding: 16px 0; }
+.conclusion-block + .conclusion-block { border-top: 1px dashed var(--line); }
+.conclusion-block h3 { margin: 0 0 9px; font-size: 15px; font-weight: 800; color: var(--ink); }
+.conclusion-block p { margin: 0; color: var(--ink); }
+
+table { width: 100%; border-collapse: separate; border-spacing: 0; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+th, td { padding: 12px 14px; border-top: 1px solid var(--line); border-left: 1px solid var(--line); vertical-align: top; text-align: left; color: var(--ink); }
+tr:first-child th, tr:first-child td { border-top: 0; }
+th:first-child, td:first-child { border-left: 0; }
+th { background: var(--soft); font-size: 15px; font-weight: 800; color: var(--ink); text-align: center; }
+.metric-table th:nth-child(1) { width: 160px; }
+.metric-table th:nth-child(2) { width: 160px; }
+.metric-table td:nth-child(1), .metric-table td:nth-child(2) { text-align: center; }
+.metric-table td:nth-child(2) { color: var(--red); font-weight: 700; }
+.metric-table td:nth-child(2) .est-note { color: var(--ink); font-weight: 400; }
+.prep-table { table-layout: fixed; }
+.prep-table th:nth-child(1) { width: 200px; }
+.prep-table th:nth-child(2), .prep-table th:nth-child(3) { width: calc((100% - 200px) / 2); }
+.prep-table td:nth-child(1) { white-space: nowrap; text-align: center; }
+.prep-required-list { margin: 0; padding-left: 1.15em; }
+.prep-required-list li { padding-left: .1em; }
+.prep-required-list .prep-status { font-weight: 800; }
+.prep-required-list .prep-detail { font-weight: 400; }
+h3.sub-h { margin: 30px 0 12px; font-size: 17px; color: var(--ink); font-weight: 800; }
+
+ul, ol { margin: 0; padding-left: 1.25em; }
+li + li { margin-top: 5px; }
+
+.what-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 4px; }
+.what-grid .card { border-left-color: var(--green); }
+.what-grid .card h3 { display: flex; align-items: center; gap: 8px; }
+.what-grid .card h3 .step-no { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--green); color: var(--ink); font-size: 12px; font-weight: 800; flex: 0 0 auto; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+
+.steps { counter-reset: step; list-style: none; padding: 0; display: grid; gap: 10px; }
+.steps li { display: grid; grid-template-columns: 30px 1fr; gap: 11px; align-items: start; margin: 0; color: var(--ink); }
+.steps li::before { counter-increment: step; content: counter(step); display: grid; place-items: center; width: 26px; height: 26px; border-radius: 4px; background: var(--soft); border: 1px solid var(--line); color: var(--ink); font-weight: 800; font-size: 13px; }
+
+details { margin-top: 36px; border: 1px solid var(--line); border-radius: 4px; padding: 12px 16px; }
+summary { cursor: pointer; font-size: 16px; font-weight: 700; color: var(--ink); }
+summary::marker { color: var(--muted); }
+details h3 { color: var(--ink); font-size: 14px; margin: 14px 0 6px; }
+details ul { color: var(--muted); }
+
+.notice { margin-top: 34px; padding: 18px 20px; border-radius: 4px; border: 1px solid var(--line); background: var(--soft); }
+.notice h2 { margin: 0 0 10px; font-size: 18px; color: var(--ink); }
+.notice ul { color: var(--muted); font-size: 12px; }
+.notice li + li { margin-top: 7px; }
+
+.footer-line { display: flex; align-items: center; gap: 16px; margin-top: 44px; color: var(--muted); font-size: 12.5px; font-weight: 700; letter-spacing: .06em; white-space: nowrap; }
+.footer-line::before, .footer-line::after { content: ""; height: 1px; background: var(--line); flex: 1 1 auto; }
+
+@media (max-width: 760px) {
+  .two-col, .what-grid { grid-template-columns: 1fr; }
+  .score-head { align-items: start; flex-direction: column; }
+  .score-basis { text-align: left; max-width: none; }
+  .metric-table th:nth-child(1), .metric-table th:nth-child(2) { width: auto; }
+  .prep-table { table-layout: auto; }
+  .prep-table th:nth-child(1), .prep-table th:nth-child(2), .prep-table th:nth-child(3) { width: auto; }
+  .prep-table td:nth-child(1) { white-space: normal; }
+  table { font-size: 13.5px; }
+  th, td { padding: 10px; }
+}
+@media print {
+  .page { width: 100%; padding: 0; }
+  .section { break-inside: avoid; }
+  details { break-inside: avoid; }
+  a { text-decoration: none; }
+}
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="hero">
+    <p class="eyebrow">啥好用 · SKILL 安装前说明书</p>
+    <h1><span class="title-red">tanzi</span><span class="title-neutral">｜啥好用评估</span></h1>
+    <div class="meta"><span>评估日期：2026-08-12</span><span>评估范围：只读检查项目 README、SKILL.md 与三个参考文件、MIT 许可证、GitHub 公开数据与提交记录。</span></div>
+    <div class="positioning"><span>tanzi 是跨平台公开信息采集 Skill。</span><span>它主要基于 AI agent、OpenCLI、浏览器登录态和公开接口，通过检索、正文读取、筛选与记录完成资料采集。</span><span>最终用户可以得到采集报告、候选清单、正文或摘录和复核材料。</span><span>经评估，tanzi 更适合需要多平台采样并核对来源的研究、内容和咨询人员。</span></div>
+  </header>
+
+  <section class="section">
+    <h2 class="section-title c-blue"><span class="num">1</span>结论概述</h2>
+    <div class="score-head"><div class="score-value"><span class="score-num">7.4/10</span><span class="score-label">｜有条件推荐</span></div><div class="score-basis">判断对象：需要围绕明确主题采集多平台公开信息并核对来源的研究、内容和咨询人员。</div></div>
+    <div class="scale"><span class="scale-segment"><i class="scale-fill" style="width:100%"></i></span><span class="scale-segment"><i class="scale-fill" style="width:100%"></i></span><span class="scale-segment"><i class="scale-fill" style="width:100%"></i></span><span class="scale-segment"><i class="scale-fill" style="width:100%"></i></span><span class="scale-segment"><i class="scale-fill" style="width:100%"></i></span><span class="scale-segment"><i class="scale-fill" style="width:100%"></i></span><span class="scale-segment"><i class="scale-fill" style="width:100%"></i></span><span class="scale-segment"><i class="scale-fill" style="width:40%"></i></span><span class="scale-segment"><i class="scale-fill" style="width:0%"></i></span><span class="scale-segment"><i class="scale-fill" style="width:0%"></i></span></div>
+    <p class="scale-note"><span class="scale-explain">分数越高，越值得安装。</span>0—3.9 不推荐｜4.0—5.9 谨慎采用｜6.0—7.4 有条件推荐｜7.5—8.9 推荐｜9.0—10 强推荐</p>
+    <div class="conclusion-box"><div class="conclusion-block"><h3>最终结论</h3><p>tanzi 部分适合这类用户，适合明确主题的多平台资料采集场景。</p><p>它的能力基础是 AI agent、OpenCLI、浏览器登录态和公开接口。</p><p>它的核心优势是来源可追溯，正文状态、失败情况和使用限制写得清楚。</p><p>它的不足是安装项随平台增加，刚发布也缺少独立使用反馈。</p></div><div class="conclusion-block"><h3>量化分析</h3><p>好用度 <span class="quant-num">6.6/10</span>，核心免费和只读设计加分，刚发布、安装项较多拉低了得分。</p><p>适合度 <span class="quant-num">8.0/10</span>，它贴合多平台采集需求，结果方便核对，但平台变化会造成局部缺口。</p></div></div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title c-green"><span class="num">2</span>这个 Skill 是啥</h2>
+    <div class="section-summary c-green">tanzi 是一个用来采集和整理多平台公开信息的 skill，主要依赖 AI agent、OpenCLI、浏览器登录态和公开接口，通过关键词拆分、渠道选择、正文读取、筛选与记录完成采集任务，主要服务需要资料可追溯的研究、内容和咨询人员。</div>
+    <div class="what-grid">
+      <div class="card"><h3><span class="step-no">1</span>使用方法</h3><ul><li>围绕明确话题采集多个平台</li><li>为研究或写作准备候选材料</li><li>核对来源、正文状态和互动数据</li></ul></div>
+      <div class="card"><h3><span class="step-no">2</span>任务步骤</h3><ol><li>确认主题、时间和平台范围</li><li>拆分关键词并选择必要渠道</li><li>获取候选材料和正文</li><li>筛选结果并记录失败情况</li><li>交付报告、清单和复核材料</li></ol></div>
+      <div class="card"><h3><span class="step-no">3</span>额外需要</h3><ul><li>需要能够读取 Skill 的 AI agent</li><li>中文平台通常需要 OpenCLI</li><li>部分平台需要账号登录态</li><li>代码或视频可能需要额外工具</li></ul></div>
+      <div class="card"><h3><span class="step-no">4</span>最后交付</h3><ul><li>可以得到采集报告和候选清单</li><li>可以得到正文或必要摘录</li><li>可以保留原始响应供复核</li></ul></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title c-amber"><span class="num">3</span>这个 Skill 好用吗</h2>
+    <div class="section-summary c-amber"><p class="score-line">好用度：<span class="score-hl">6.6/10</span></p><p>完整度较好，工作流、渠道、交付和安全规则齐全。优势和不足相比，可追溯和只读设计的权重更大。</p></div>
+    <div class="two-col">
+      <div class="plain-box"><h3>好用之处</h3><ul><li>渠道按研究问题选择，不会默认把所有平台跑一遍。</li><li>原始链接、时间、正文状态、失败和降级都有记录。</li><li>社区样本和事实材料分开，避免把讨论热度当总体数据。</li><li>只执行平台读取，不发帖、评论、点赞或导出 Cookie。</li></ul></div>
+      <div class="plain-box"><h3>可能卡住</h3><ul><li>中文内容平台和 X 通常需要浏览器扩展及登录态。</li><li>平台接口经常变化，工具存在也不代表当天一定能取到内容。</li><li>公开项目刚发布，长期维护和跨设备表现还没有足够记录。</li></ul></div>
+    </div>
+    <h3 class="sub-h">指标分析</h3>
+    <table class="metric-table"><thead><tr><th>主要指标</th><th>评估结果</th><th>用户影响</th></tr></thead><tbody><tr><td>公开关注度</td><td>低关注/起步</td><td>项目刚发布，目前有 1 个 Star、0 个 Fork 和 1 次提交。</td></tr><tr><td>可验证性</td><td>一般</td><td>文档和许可证齐全，公开项目尚缺自动测试、发布记录和独立案例。</td></tr><tr><td>安装复杂度</td><td>中等</td><td>从零安装：复制 Skill 后，还要按所选平台准备工具、扩展和登录态。</td></tr><tr><td>任务复杂度</td><td>中等<span class="est-note">｜根据公开文件估算</span></td><td>固定常规任务：给出主题后可连续执行，平台故障和正文缺失需要判断。</td></tr><tr><td>Skill 调用准确性</td><td>较准确</td><td>根据名称、描述和触发规则判断，多平台采集和排除范围写得明确。</td></tr><tr><td>额外涉及费用</td><td>无新增费用</td><td>公开版使用 MIT 许可证，不调用按次付费接口；外部平台可能有自身成本。</td></tr><tr><td>Token 消耗</td><td>中等<span class="est-note">｜根据公开文件估算</span></td><td>固定常规任务：多平台结果、正文读取和报告生成是主要消耗，可缩小采样范围。</td></tr><tr><td>风险值</td><td>较低<span class="est-note">｜根据公开文件估算</span></td><td>固定常规任务：只读采集并本地保存结果，登录态和第三方工具需要谨慎管理。</td></tr></tbody></table>
+    <h3 class="sub-h">安装准备</h3>
+    <table class="prep-table"><thead><tr><th>前期准备</th><th>是否必须</th><th>用户影响</th></tr></thead><tbody><tr><td>额外软件安装</td><td><ul class="prep-required-list"><li><span class="prep-scope">安装Skill</span><span class="prep-sep">｜</span><strong class="prep-status">必须</strong><span class="prep-sep">｜</span><span class="prep-detail">需要支持 Agent Skills 的 AI agent</span></li><li><span class="prep-scope">中文平台</span><span class="prep-sep">｜</span><strong class="prep-status">按条件</strong><span class="prep-sep">｜</span><span class="prep-detail">通常需要 Node.js、OpenCLI 和扩展</span></li><li><span class="prep-scope">代码视频</span><span class="prep-sep">｜</span><strong class="prep-status">按条件</strong><span class="prep-sep">｜</span><span class="prep-detail">可能需要 GitHub CLI 或 yt-dlp</span></li></ul></td><td>平台越多，需要安装和维护的工具越多；首次调用会先检查并说明。</td></tr><tr><td>额外注册/登录的账号</td><td><ul class="prep-required-list"><li><span class="prep-scope">公开接口</span><span class="prep-sep">｜</span><strong class="prep-status">不需要</strong><span class="prep-sep">｜</span><span class="prep-detail">可直接读取允许匿名访问的来源</span></li><li><span class="prep-scope">内容平台</span><span class="prep-sep">｜</span><strong class="prep-status">按条件</strong><span class="prep-sep">｜</span><span class="prep-detail">X、小红书等可能需要浏览器登录</span></li></ul></td><td>登录不足时会跳过对应渠道，并在报告中写明覆盖缺口。</td></tr><tr><td>API KEY/联网服务</td><td><ul class="prep-required-list"><li><span class="prep-scope">基础采集</span><span class="prep-sep">｜</span><strong class="prep-status">不需要</strong><span class="prep-sep">｜</span><span class="prep-detail">公开版不调用按次付费接口</span></li><li><span class="prep-scope">可选来源</span><span class="prep-sep">｜</span><strong class="prep-status">按条件</strong><span class="prep-sep">｜</span><span class="prep-detail">少数学术或搜索服务可配置 Key</span></li></ul></td><td>使用可选服务前需要核对额度、数据政策和当前规则。</td></tr><tr><td>涉及的数据与隐私</td><td><ul class="prep-required-list"><li><span class="prep-scope">查询内容</span><span class="prep-sep">｜</span><strong class="prep-status">必然涉及</strong><span class="prep-sep">｜</span><span class="prep-detail">关键词和网址会发送给相应平台</span></li><li><span class="prep-scope">登录来源</span><span class="prep-sep">｜</span><strong class="prep-status">按条件</strong><span class="prep-sep">｜</span><span class="prep-detail">读取当前浏览器已有登录态</span></li><li><span class="prep-scope">采集结果</span><span class="prep-sep">｜</span><strong class="prep-status">必然涉及</strong><span class="prep-sep">｜</span><span class="prep-detail">报告和原始响应保存在本地</span></li></ul></td><td>应使用有权访问的账号，避免在查询词和本地文件中放入敏感信息。</td></tr></tbody></table>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title c-red"><span class="num">4</span>这个 Skill 适合你吗</h2>
+    <div class="fit-verdict"><p class="score-line">适合度：<span class="score-hl">8.0/10</span></p><p>tanzi 部分适合需要围绕明确主题采集多平台公开信息并核对来源的研究、内容和咨询人员安装。</p></div>
+    <div class="two-col">
+      <div class="plain-box"><h3>适合场景</h3><ul><li>行业研究、内容选题和竞品观察</li><li>需要同时查看中文与海外讨论</li><li>希望保留来源、正文状态和失败记录</li><li>愿意按平台准备工具与登录态</li></ul></div>
+      <div class="plain-box"><h3>不适合场景</h3><ul><li>只查一个事实或读取一个网址</li><li>希望直接生成可发布文章</li><li>要求所有平台长期稳定匿名访问</li><li>需要自动发帖、评论或账号运营</li></ul></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title c-blue"><span class="num">5</span>使用节奏建议</h2>
+    <ol class="steps"><li>第一次用一个小主题和两三个平台试采，检查链接、正文状态和失败记录。</li><li>确认结果符合需求后，再增加平台、时间范围和候选数量。</li><li>平台报错时先做小结果上限测试，连续失败就停止该渠道并保留错误。</li><li>依赖长期不用或登录维护成本超过收益时，移除对应工具或停用。</li></ol>
+  </section>
+
+  <details><summary>来源与尚不能确认的事项</summary><h3>主要来源</h3><ul><li><a href="https://github.com/hexiaofeier/tanzi" target="_blank" rel="noreferrer noopener">tanzi GitHub 项目</a></li><li><a href="https://github.com/hexiaofeier/tanzi/blob/main/README.md" target="_blank" rel="noreferrer noopener">README</a></li><li><a href="https://github.com/hexiaofeier/tanzi/blob/main/skills/tanzi/SKILL.md" target="_blank" rel="noreferrer noopener">SKILL.md</a></li><li><a href="https://github.com/hexiaofeier/tanzi/blob/main/skills/tanzi/references/setup.md" target="_blank" rel="noreferrer noopener">环境准备</a></li><li><a href="https://github.com/hexiaofeier/tanzi/blob/main/skills/tanzi/references/channels.md" target="_blank" rel="noreferrer noopener">渠道路由</a></li><li><a href="https://github.com/hexiaofeier/tanzi/blob/main/LICENSE" target="_blank" rel="noreferrer noopener">MIT 许可证</a></li></ul><h3>尚不能确认</h3><ul><li>项目刚发布，尚未积累独立用户反馈和长期维护记录。</li><li>尚未在所有 Claude Code、Codex 和 WorkBuddy 版本中完成跨设备实测。</li><li>各平台的登录要求、页面接口和可读取字段会继续变化。</li></ul></details>
+
+  <aside class="notice">
+    <h2>说明</h2>
+    <ul>
+      <li>本报告中的 AI agent，指能够读取 Skill、理解任务，并按规则调用电脑软件或联网服务完成工作的 AI 助手，例如 Codex、Claude Code、Workbuddy 等。它能否执行命令、联网或调用工具，取决于具体产品和用户授予的权限。</li>
+      <li>本报告依据公开文件和只读检查静态完成，不代表 Skill 在本机已经安装、运行和长期使用后的用户体验；最终推荐度结合好用度得分和适合度得分加权平均得出。</li>
+      <li>“啥好用”不能替代专业评测，包括代码安全审计、恶意代码检测、软件质量与兼容性测试、隐私合规审查、许可证审查或法律意见。</li>
+      <li>下载或使用前，请核对官方来源、依赖、权限、数据去向、收费和许可证，并注意安全风险。</li>
+      <li>请勿在对话或报告中粘贴 API Key、Cookie、Token、密码等凭证；优先使用测试环境、最小权限、专用账号和可恢复备份。</li>
+      <li>任何安装、授权、付费、上传、发布或自动操作均须由用户确认。评分只作采用参考；项目更新后应重新评估。</li>
+    </ul>
+  </aside>
+
+  <div class="footer-line"><span>啥好用skill•盒小Feier</span></div>
+
+</main>
+</body>
+</html>
