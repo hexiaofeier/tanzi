@@ -13,6 +13,17 @@
 5. 降级来源只能补相同证据类型。网页搜索摘要不能冒充帖子正文，热榜不能冒充平台关键词检索。
 6. 所有状态超过 30 天或发生错误时重新验证。
 
+## 登录态与账号安全
+
+X / Twitter、小红书、微博、即刻、Reddit、Facebook、Instagram、雪球等平台的搜索、正文、评论或时间线可能依赖浏览器登录态；知乎、B站等也可能临时要求登录或验证。执行前先检查当前命令帮助和登录状态，再做 3—5 条只读测试。
+
+- 建议用户使用专门用于公开信息阅读的低价值小号，不使用承载私人关系、支付信息、企业管理权限或重要历史内容的主账号。
+- 小号只是缩小潜在损失，不保证免于限流、验证、账号限制或封禁；不得用小号批量注册或绕过平台治理。
+- 用户本人在独立浏览器 Profile 中手动登录。不得读取、导出或索取浏览器 Cookie，不得在输出、日志或 Issue 中记录 Cookie、Token、密码和验证码。
+- 默认串行或低并发。出现验证码、`429`、异常登录提醒或风控页面时立即停止该平台，不连续重试，不尝试绕过。
+- 只执行读取命令。即使当前适配器暴露发布、评论、点赞、签到等写命令，也不得调用。
+- 把未登录、登录过期、风控、扩展断连、超时、零结果分别记录；不能把访问失败写成平台没有相关内容。
+
 ## 一、通用网页与新闻
 
 可选路径包括 AnySearch、DuckDuckGo、Google News、RSS 和 Jina Reader。使用前以当前服务说明与命令帮助为准。
@@ -43,6 +54,7 @@ curl -s "https://r.jina.ai/<完整网址>"
 | 抖音 | `opencli douyin search` | 按当前帮助 | 视频元数据不等于口播正文或评论观点 |
 | B站 | `opencli bilibili search` | `video` / `subtitle` / `comments` | 能否取得字幕取决于视频与当前接口 |
 | 微博 | `opencli weibo` 下的当前搜索/热榜命令 | 按当前帮助 | 登录态与页面接口可能变化 |
+| 即刻 | `opencli jike search` | `post` / `topic` / `user` | 通常依赖浏览器登录态；只使用只读命令 |
 
 ### 公众号正文
 
@@ -77,7 +89,29 @@ opencli xiaohongshu note "<搜索结果中的完整URL，含xsec_token>" -f yaml
 
 不要写“某个内部引擎也使用同一接口”之类只有作者知道的说明；只记录本 Skill 自己的接口依赖与失效风险。
 
-## 四、X / Twitter
+## 四、V2EX
+
+OpenCLI 1.8.6 当前提供 `v2ex hot`、`latest`、`node`、`topic`、`replies`、`member` 等命令，但没有 `v2ex search`。因此按任务类型路由：
+
+```text
+# 热门、最新或明确节点：直接读 V2EX
+opencli v2ex hot --limit 10 -f yaml
+opencli v2ex latest --limit 10 -f yaml
+opencli v2ex node python --limit 10 -f yaml
+
+# 已知主题 ID：读取正文与回复
+opencli v2ex topic <主题ID> -f yaml
+opencli v2ex replies <主题ID> -f yaml
+
+# 关键词发现：交给通用搜索，再读取主题
+site:v2ex.com/t/ 关键词
+```
+
+站点限定搜索是外部搜索引擎的收录结果，不是 V2EX 原生全文检索。它可能漏掉新帖、旧帖和未收录页面；零结果只能标记“本轮未检出”。节点浏览适合补充近期讨论，但不能冒充全站关键词检索。
+
+[V2EX 官方 API 2.0](https://www.v2ex.com/help/api) 当前公开的读取范围包括节点主题、指定主题和主题回复，没有列出全文关键词搜索接口。接口范围发生变化时，先看当前官方文档与 `opencli v2ex --help`，再更新本节。
+
+## 五、X / Twitter
 
 OpenCLI 当前可能提供 `twitter search`、`tweets`、`article`、`thread` 等只读命令，依赖浏览器扩展、X 登录态、网络和页面接口。
 
@@ -90,7 +124,7 @@ opencli twitter search "关键词" --limit 3 -f yaml --trace retain-on-failure
 
 只读采集，不访问不必要的 followers/following，不使用主账号进行高频自动化，不导出 Cookie。
 
-## 五、学术、产品、代码与视频
+## 六、学术、产品、代码与视频
 
 | 类型 | 推荐路径 | 验证点 |
 |---|---|---|
@@ -102,7 +136,7 @@ opencli twitter search "关键词" --limit 3 -f yaml --trace retain-on-failure
 
 查询参数必须进行 URL 编码。学术 API 的匿名限流和密钥额度是实时状态，失败后选择另一独立来源并说明覆盖差异。
 
-## 六、速率与失败恢复
+## 七、速率与失败恢复
 
 - 默认串行或低并发，只对独立公共接口做有限并发。
 - 平台出现验证码、429 或风控提示时停止该平台，不尝试绕过。
