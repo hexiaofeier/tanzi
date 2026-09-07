@@ -5,3 +5,8 @@ desktop.ini
 _raw/
 .tanzi-env
 .env
+node_modules/
+__pycache__/
+*.pyc
+.env.*
+!.env.example

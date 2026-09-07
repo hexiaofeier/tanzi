@@ -1,0 +1,11 @@
+{
+  "name": "tanzi-wx-search-adapter",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Bounded Sogou WeChat collection adapted from wx-search-cli 0.1.0",
+  "license": "MIT",
+  "engines": { "node": ">=20.19.0" },
+  "scripts": { "test": "node --test collector.test.mjs" },
+  "dependencies": { "cheerio": "1.2.0" }
+}
